@@ -2,12 +2,18 @@ package models;
 
 import java.util.Objects;
 
-public class Book {
+public class Book implements Comparable<Book>  {
 
     String titulo;
     String autor;
     int anio;
 
+    public Book(String titulo, String autor, int anio) {
+        this.titulo = titulo;
+        this.anio = anio;
+        this.autor = autor;
+
+    }
     public String getTitulo() {
         return titulo;
     }
@@ -27,6 +33,16 @@ public class Book {
         this.anio = anio;
     }
 
+
+     @Override
+    public int compareTo(Book other) {
+        int cmpTitulo = other.titulo.compareTo(this.titulo);
+        if (cmpTitulo != 0) return cmpTitulo;
+
+        int cmpAnio = Integer.compare(this.anio, other.anio);
+        return cmpAnio;
+    }
+
    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,6 +55,15 @@ public class Book {
     @Override
     public int hashCode() {
         return Objects.hash(titulo, anio);
+    }
+
+     @Override
+    public String toString() {
+        return "Book{" +
+                "titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", año=" + anio +
+                '}';
     }
 
 }
